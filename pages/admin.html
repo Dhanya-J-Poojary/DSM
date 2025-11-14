@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard · Department Stock Management</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="../css/NITTE_logo.png" class="sidebar-logo" alt="Nitte Institute Logo">
+                <h2>DSM Admin</h2>
+                <p id="adminName" style="font-size:14px;color:#7a82ab;">Admin</p>
+            </div>
+            <nav class="sidebar-nav">
+                <a class="nav-item active" href="#" data-section="stock">
+                    <span>📦</span>
+                    <span>Stock</span>
+                </a>
+                <a class="nav-item" href="#" data-section="requests">
+                    <span>🗂️</span>
+                    <span>Requests</span>
+                    <span id="requestCount" class="badge">0</span>
+                </a>
+                <a class="nav-item" href="#" data-section="notifications">
+                    <span>🔔</span>
+                    <span>Notifications</span>
+                    <span id="notifCount" class="badge">0</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <button id="logoutBtn" class="btn btn-secondary" type="button">Logout</button>
+            </div>
+        </aside>
+        <main class="main-content">
+            <section class="budget-section">
+                <div class="budget-section-header">
+                    <div>
+                        <h2>Department Budget</h2>
+                        <p>Track available funds, spending, and remaining balance.</p>
+                    </div>
+                </div>
+                <div class="budget-grid">
+                    <div class="budget-card total">
+                        <span class="budget-label">Total Budget</span>
+                        <span class="budget-value" id="totalBudgetValue">₹0.00</span>
+                    </div>
+                    <div class="budget-card spent">
+                        <span class="budget-label">Total Spent</span>
+                        <span class="budget-value" id="totalSpentValue">₹0.00</span>
+                    </div>
+                    <div class="budget-card remaining">
+                        <span class="budget-label">Remaining Balance</span>
+                        <span class="budget-value" id="remainingBudgetValue">₹0.00</span>
+                    </div>
+                </div>
+                <form id="budgetForm" class="budget-form">
+                    <label for="budgetAmount">Set Department Budget</label>
+                    <div class="budget-input-group">
+                        <input id="budgetAmount" type="number" min="0" step="0.01" placeholder="Enter total budget (₹)" required>
+                        <button type="submit" class="btn btn-primary">Save Budget</button>
+                    </div>
+                    <p class="budget-note">Budget must be equal to or higher than the amount already spent.</p>
+                </form>
+            </section>
+            <header class="content-header">
+                <h1>Inventory Overview</h1>
+                <p style="color:#7a82ab;">Manage stock levels, review requests, and keep the department supplied.</p>
+            </header>
+            <section id="stockSection" class="content-section active">
+                <div class="section-header">
+                    <h2>Stock Items</h2>
+                    <button id="addStockBtn" class="btn btn-primary" type="button">Add Item</button>
+                </div>
+                <div id="stockTable" class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Quantity</th>
+                                <th>Budget / Unit</th>
+                                <th>Total Budget</th>
+                                <th>Description</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="stockTableBody"></tbody>
+                    </table>
+                </div>
+            </section>
+            <section id="requestsSection" class="content-section">
+                <div class="section-header">
+                    <h2>Pending Requests</h2>
+                    <div class="section-actions" style="display:flex;gap:12px;flex-wrap:wrap;">
+                        <button id="clearRequests" class="btn btn-light" type="button">Clear All</button>
+                    </div>
+                </div>
+                <div id="requestsList" class="requests-container"></div>
+            </section>
+            <section id="notificationsSection" class="content-section">
+                <div class="section-header">
+                    <h2>Notifications</h2>
+                    <div class="section-actions" style="display:flex;gap:12px;flex-wrap:wrap;">
+                        <button id="markAllRead" class="btn btn-light" type="button">Mark All Read</button>
+                        <button id="clearNotifications" class="btn btn-light" type="button">Clear All</button>
+                    </div>
+                </div>
+                <div id="notificationsList" class="notifications-container"></div>
+            </section>
+        </main>
+    </div>
+
+    <div id="stockModal" class="modal" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Add Stock Item</h3>
+                <span id="closeModal" class="modal-close">&times;</span>
+            </div>
+            <form id="stockForm" class="modal-body">
+                <div class="form-group">
+                    <label for="itemName">Item Name</label>
+                    <input id="itemName" type="text" required>
+                </div>
+                <div class="form-group">
+                    <label for="itemQuantity">Quantity</label>
+                    <input id="itemQuantity" type="number" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="itemBudget">Budget Per Unit</label>
+                    <input id="itemBudget" type="number" min="0" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="itemDescription">Description</label>
+                    <textarea id="itemDescription" rows="3" required></textarea>
+                </div>
+                <input id="editItemId" type="hidden">
+                <div class="modal-footer">
+                    <button id="cancelModal" class="btn btn-secondary" type="button">Cancel</button>
+                    <button class="btn btn-primary" type="submit">Save Item</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../js/storage.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/admin.js"></script>
+</body>
+</html>

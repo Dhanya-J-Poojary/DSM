@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Dashboard · Department Stock Management</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="../css/NITTE_logo.png" class="sidebar-logo" alt="Nitte Institute Logo">
+                <h2>DSM Staff</h2>
+                <p id="userName" style="font-size:14px;color:#7a82ab;">User</p>
+            </div>
+            <nav class="sidebar-nav">
+                <a class="nav-item active" href="#" data-section="stock">
+                    <span>📦</span>
+                    <span>Available Stock</span>
+                </a>
+                <a class="nav-item" href="#" data-section="myRequests">
+                    <span>🗂️</span>
+                    <span>My Requests</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <button id="logoutBtn" class="btn btn-secondary" type="button">Logout</button>
+            </div>
+        </aside>
+        <main class="main-content">
+            <header class="content-header">
+                <h1>Staff Workspace</h1>
+                <p style="color:#7a82ab;">Review stock availability and submit requests for the admin to approve.</p>
+            </header>
+            <section id="stockSection" class="content-section active">
+                <div class="section-header" style="align-items:flex-start;flex-wrap:wrap;">
+                    <h2>Stock Catalogue</h2>
+                    <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-end;">
+                        <button id="openRequest" class="btn btn-primary" type="button">New Request</button>
+                        <div class="alert alert-info" id="stockHint" style="padding:10px 14px;">Raise a request if an item is missing or quantity is low. The admin will be notified.</div>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Quantity</th>
+                                <th>Budget / Unit</th>
+                                <th>Total Budget</th>
+                                <th>Description</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="stockTableBody"></tbody>
+                    </table>
+                </div>
+            </section>
+            <section id="myRequestsSection" class="content-section">
+                <div class="section-header">
+                    <h2>My Requests</h2>
+                </div>
+                <div id="myRequestsList" class="requests-container"></div>
+            </section>
+        </main>
+    </div>
+
+    <div id="requestModal" class="modal" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Request Stock Item</h3>
+                <span id="closeRequestModal" class="modal-close">&times;</span>
+            </div>
+            <form id="requestForm" class="modal-body">
+                <div class="form-group">
+                    <label for="requestItem">Item Name</label>
+                    <input id="requestItem" type="text" required>
+                </div>
+                <div class="form-group">
+                    <label for="requestQuantity">Quantity Needed</label>
+                    <input id="requestQuantity" type="number" min="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="requestReason">Reason</label>
+                    <textarea id="requestReason" rows="3" required></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button id="cancelRequest" class="btn btn-secondary" type="button">Cancel</button>
+                    <button class="btn btn-primary" type="submit">Submit Request</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../js/storage.js"></script>
+    <script src="../js/auth.js"></script>
+    <script>const DASHBOARD_ROLE = "staff";</script>
+    <script src="../js/role.js"></script>
+</body>
+</html>
