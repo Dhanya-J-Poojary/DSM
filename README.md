@@ -244,17 +244,8 @@ Potential improvements:
 
 ## Support
 
-For issues or questions:
-1. Check browser console for errors
-2. Verify all files are present
-3. Ensure JavaScript is enabled
-4. Test in a different browser
+feel free to commit changes
 
-## License
-
-This project is provided as-is for educational and departmental use.
-
----
 
 **Version**: 1.0  
 **Last Updated**: November 2025  
