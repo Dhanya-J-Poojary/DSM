@@ -244,9 +244,9 @@ Potential improvements:
 
 ## Support
 
-feel free to commit changes
+Feel free to commit changes
 
 
-**Version**: 1.0  
 **Last Updated**: November 2025  
-**Maintained By**: Department Administration
+**Maintained By**: Dhanya J Poojary
+
